@@ -18,7 +18,7 @@ cache:
 jobs:
   include:
     - stage: test
-      script: ./gradlew build --scan -s
+      script: ./gradlew build -x test
     - stage: build_image
       script: docker build -t webrato .
     - stage: push_image
