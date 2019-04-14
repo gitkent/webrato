@@ -18,9 +18,13 @@ cache:
 jobs:
   include:
     - stage: test
-      before_install:
-        - cd ./mysql && docker build -t web-mysql . && docker run -d -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} -e MYSQL_PASSWORD=${MYSQL_PASSWORD} web-mysql
-      script: cd $HOME && ls && bash gradlew build --scan -s
+      script: ./gradlew build --scan -s
+    - stage: build_image
+      script: docker build -t webrato .
+    - stage: push_image
+      script: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin && docker push kentio/webrato:latest
       
 stages:
   - test
+  - build_image
+  - push_image

@@ -1,0 +1,19 @@
+version: '3'
+services:
+  webrato:
+    image: "kentio/webrato:latest"
+    depends_on:
+      - mysql
+    environment:
+      - DB_USER=myuser
+      - DB_PASSWORD=mypassword
+    ports:
+      - "8080:8080"
+
+  mysql:
+    image: "kentio/webrato-mysql:latest"
+    environment:
+      - MYSQL_ROOT_PASSWORD=supersecret
+      - MYSQL_PASSWORD=mypassword
+    ports: 
+      - "3306:3306"
