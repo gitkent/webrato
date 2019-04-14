@@ -1,11 +1,10 @@
 language: java
 install: true
+service:
+  - docker
 
 jdk:
   - openjdk11
-
-script:
-  - ./gradlew build --scan -s
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -16,3 +15,12 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
+jobs:
+  include:
+    - stage: test
+      before_install:
+        - cd ./mysql && docker build -t web-mysql . && docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} -e MYSQL_PASSWORD=${MYSQL_PASSWORD} web-mysql
+      script: ./gradlew build --scan -s
+      
+stages:
+  - test
