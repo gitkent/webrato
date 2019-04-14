@@ -18,10 +18,7 @@ cache:
 jobs:
   include:
     - stage: build
-      script: ./gradlew build -x test
-    - stage: push_image
-      script: docker build -t webrato . && docker tag webrato kentio/webrato:latest && echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin && docker push kentio/webrato:latest
+      script: ./gradlew build -x test && docker build -t webrato . && docker tag webrato kentio/webrato:latest && echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin && docker push kentio/webrato:latest
       
 stages:
   - build
-  - push_image
