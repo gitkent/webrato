@@ -21,10 +21,13 @@ jobs:
       script: ./gradlew build -x test
     - stage: build_image
       script: docker build -t webrato .
+    - stage: tag_image
+      script: docker tag webrato kentio/webrato:latest
     - stage: push_image
       script: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin && docker push kentio/webrato:latest
       
 stages:
   - test
   - build_image
+  - tag_image
   - push_image
