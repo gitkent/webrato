@@ -19,7 +19,7 @@ jobs:
   include:
     - stage: test
       before_install:
-        - cd ./mysql && docker build -t web-mysql . && docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} -e MYSQL_PASSWORD=${MYSQL_PASSWORD} web-mysql
+        - cd ./mysql && docker build -t web-mysql . && docker run -d -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} -e MYSQL_PASSWORD=${MYSQL_PASSWORD} web-mysql
       script: ./gradlew build --scan -s
       
 stages:
