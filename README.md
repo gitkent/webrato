@@ -1,6 +1,6 @@
 # webrato
 
-[![Build Status](https://travis-ci.com/gitkent/webrato.svg?branch=master)](https://travis-ci.com/gitkent/webrato)
+[![Build Status](https://travis-ci.org/gitkent/webrato.svg?branch=master)](https://travis-ci.org/gitkent/webrato)
 ## Start up
 ### with Docker Compose
 1. install Docker on your OS flavor
