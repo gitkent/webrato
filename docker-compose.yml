@@ -1,19 +1,21 @@
 version: '3'
 services:
   webrato:
-    image: "kentio/webrato:latest"
+    image: "kentio/webrato:feature"
     depends_on:
-      - mysql
+      - db
     environment:
       - DB_USER=myuser
-      - DB_PASSWORD=mypassword
+      - DB_PASSWORD
     ports:
       - "8080:8080"
+    restart: on-failure
 
-  mysql:
-    image: "kentio/webrato-mysql:latest"
+  db:
+    #image: "kentio/webrato-mysql:latest"
+    build: ./mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=supersecret
-      - MYSQL_PASSWORD=mypassword
-    ports: 
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_PASSWORD
+    ports:
       - "3306:3306"
